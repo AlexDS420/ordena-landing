@@ -102,7 +102,7 @@ export default function Hero() {
             className="mt-6 text-[clamp(2.5rem,5vw,4rem)] font-bold leading-[1.08] tracking-[-0.02em] text-ink"
           >
             {hero.titleStart}
-            <span className="text-gold">{hero.titleAccent}</span>
+            <span className="text-gold-deep">{hero.titleAccent}</span>
             {hero.titleEnd}
           </h1>
           <p className="mx-auto mt-5 max-w-[660px] text-[16.5px] leading-relaxed text-muted">

@@ -27,7 +27,7 @@ export default function Testimonials() {
             <Reveal key={t.name} delay={(i % 3) * 90}>
               <figure className="flex h-full flex-col rounded-lg border border-hairline bg-white p-6 shadow-soft transition-shadow duration-300 hover:shadow-lift md:p-7">
                 <Stars />
-                <blockquote className="mt-4 flex-1 text-[15.5px] leading-relaxed text-[#374151]">
+                <blockquote className="mt-4 flex-1 text-[15.5px] leading-relaxed text-ink-soft">
                   “{t.quote}”
                 </blockquote>
                 <figcaption className="mt-5 flex items-center gap-3">

@@ -111,12 +111,12 @@ export const testimonials = {
   title: 'Lo que dicen nuestros usuarios',
   subtitle: 'Historias de la experiencia que buscamos crear en cada pedido.',
   items: [
-    { quote: 'Pedir desde el celular fue inmediato. Sin filas y sin confusiones.', name: 'Mariana G.', role: 'Cliente frecuente', initials: 'MG', tone: 'bg-[#FDE7D8] text-[#B45309]', placeholder: true },
-    { quote: 'El panel nos ordenó la operación del mostrador por completo.', name: 'Diego R.', role: 'Encargado de local', initials: 'DR', tone: 'bg-[#E8EFD8] text-[#4D7C0F]', placeholder: true },
-    { quote: 'Los clientes ven el estado de su pedido y preguntan mucho menos.', name: 'Camila T.', role: 'Cajera', initials: 'CT', tone: 'bg-[#FCE9E4] text-[#C2410C]', placeholder: true },
-    { quote: 'El pago con QR agilizó el cierre de cada mesa.', name: 'Andrés P.', role: 'Propietario', initials: 'AP', tone: 'bg-[#E5E9F5] text-[#3730A3]', placeholder: true },
-    { quote: 'Tener el menú online nos liberó el teléfono del local.', name: 'Lucía M.', role: 'Administradora', initials: 'LM', tone: 'bg-[#F5E6D3] text-[#92400E]', placeholder: true },
-    { quote: 'Actualizar el estado de un pedido toma un segundo.', name: 'Sebastián V.', role: 'Cocina', initials: 'SV', tone: 'bg-[#E0F0EC] text-[#0F766E]', placeholder: true },
+    { quote: 'Pedir desde el celular fue inmediato. Sin filas y sin confusiones.', name: 'Mariana G.', role: 'Cliente frecuente', initials: 'MG', tone: 'bg-sand text-gold-deep', placeholder: true },
+    { quote: 'El panel nos ordenó la operación del mostrador por completo.', name: 'Diego R.', role: 'Encargado de local', initials: 'DR', tone: 'bg-cream text-gold-deep', placeholder: true },
+    { quote: 'Los clientes ven el estado de su pedido y preguntan mucho menos.', name: 'Camila T.', role: 'Cajera', initials: 'CT', tone: 'bg-sand text-gold-deep', placeholder: true },
+    { quote: 'El pago con QR agilizó el cierre de cada mesa.', name: 'Andrés P.', role: 'Propietario', initials: 'AP', tone: 'bg-cream text-gold-deep', placeholder: true },
+    { quote: 'Tener el menú online nos liberó el teléfono del local.', name: 'Lucía M.', role: 'Administradora', initials: 'LM', tone: 'bg-sand text-gold-deep', placeholder: true },
+    { quote: 'Actualizar el estado de un pedido toma un segundo.', name: 'Sebastián V.', role: 'Cocina', initials: 'SV', tone: 'bg-cream text-gold-deep', placeholder: true },
   ],
 };
 

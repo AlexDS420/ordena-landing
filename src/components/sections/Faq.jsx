@@ -16,7 +16,7 @@ export default function Faq() {
             <p className="text-[15.5px] text-muted">{faq.contactLabel}</p>
             <a
               href={`mailto:${faq.contactEmail}`}
-              className="mt-1.5 inline-block text-[20px] font-semibold text-gold transition-colors hover:text-gold-deep hover:underline"
+              className="mt-1.5 inline-block text-[20px] font-semibold text-gold-deep transition-colors hover:text-gold-deep hover:underline"
             >
               {faq.contactEmail}
             </a>

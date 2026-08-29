@@ -1,0 +1,5 @@
+# Copiar a .dev.vars para desarrollo local con wrangler dev.
+# NUNCA commitear .dev.vars con valores reales.
+ADMIN_TOKEN=reemplaza-esto-con-un-token-largo-y-aleatorio
+# Opcional: origen permitido para CORS en /api/*
+ALLOWED_ORIGIN=

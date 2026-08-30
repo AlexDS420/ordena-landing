@@ -39,7 +39,7 @@ export default function Testimonials() {
                   </span>
                   <span>
                     <span className="block text-[14px] font-semibold text-ink-soft">{t.name}</span>
-                    <span className="block text-[13px] text-faint">{t.role}</span>
+                    <span className="block text-[13px] text-muted">{t.role}</span>
                   </span>
                 </figcaption>
               </figure>

@@ -95,18 +95,18 @@ async function crearLead(request, env) {
   // "elapsed": ms desde que se renderizó el formulario (lo envía el frontend).
   // Menos de 2 s => envío automatizado.
   const elapsed = Number(body.elapsed);
-  if (!Number.isFinite(elapsed) || elapsed < 2000) {
-    return json({ ok: false, error: 'validation' }, 400, env);
+  if (!Number.isFinite(elapsed) || elapsed < 800) {
+    return json({ ok: false, error: 'validation', field: 'elapsed' }, 400, env);
   }
 
   // Requeridos: se validan sin recortar (recortar podría corromper el dato).
   const name = texto(body.name);
   const email = texto(body.email);
   if (name.length < 2 || name.length > LIMITES.name) {
-    return json({ ok: false, error: 'validation' }, 400, env);
+    return json({ ok: false, error: 'validation', field: 'name' }, 400, env);
   }
   if (email.length > LIMITES.email || !EMAIL_RE.test(email)) {
-    return json({ ok: false, error: 'validation' }, 400, env);
+    return json({ ok: false, error: 'validation', field: 'email' }, 400, env);
   }
 
   // Opcionales: se recortan al máximo permitido.

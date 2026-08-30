@@ -11,16 +11,18 @@ import { Button } from '../ui/Button.jsx';
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export default function LeadForm() {
-  const [values, setValues] = useState({ name: '', company: '', email: '', phone: '', message: '' });
+  const [values, setValues] = useState({ name: '', company: '', email: '', phone: '', message: '', website: '' });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
   const [errorDetail, setErrorDetail] = useState('');
-  const mountedAt = useRef(Date.now());
+  const firstInteractAt = useRef(Date.now());
   const lastSuccessAt = useRef(0);
 
-  useEffect(() => {
-    mountedAt.current = Date.now();
-  }, []);
+  // elapsed se mide desde la primera interacción (foco/teclado) del usuario:
+  // un humano con autocompletado nunca quedará por debajo del umbral del server.
+  const markFirstInteract = () => {
+    if (firstInteractAt.current === 0) firstInteractAt.current = Date.now();
+  };
 
   const set = (field) => (e) => {
     setValues((v) => ({ ...v, [field]: e.target.value }));
@@ -46,7 +48,7 @@ export default function LeadForm() {
     try {
       await submitLead({
         ...values,
-        elapsed: Date.now() - mountedAt.current,
+        elapsed: firstInteractAt.current ? Date.now() - firstInteractAt.current : 0,
       });
       lastSuccessAt.current = Date.now();
       // Notificación opcional por correo; su fallo no afecta el lead guardado.
@@ -54,9 +56,10 @@ export default function LeadForm() {
       setStatus('success');
     } catch (err) {
       if (err && err.code === 'validation') {
+        const field = err.field || 'email';
         setErrors((prev) => ({
           ...prev,
-          [err.field || 'name']: err.field === 'email' ? 'Revisa el correo e inténtalo de nuevo.' : 'Revisa tus datos e inténtalo de nuevo.',
+          [field]: field === 'email' ? 'Revisa el correo e inténtalo de nuevo.' : 'Revisa tus datos e inténtalo de nuevo.',
         }));
         setStatus('idle');
         return;
@@ -67,10 +70,11 @@ export default function LeadForm() {
   }
 
   function reset() {
-    setValues({ name: '', company: '', email: '', phone: '', message: '' });
+    setValues({ name: '', company: '', email: '', phone: '', message: '', website: '' });
     setErrors({});
     setStatus('idle');
-    mountedAt.current = Date.now();
+    firstInteractAt.current = 0;
+    lastSuccessAt.current = 0;
   }
 
   const field =
@@ -94,7 +98,7 @@ export default function LeadForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate>
+    <form onSubmit={handleSubmit} onFocus={markFirstInteract} onKeyDown={markFirstInteract} noValidate>
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="lead-name" className="mb-1.5 block text-[14px] font-medium text-ink-soft">
@@ -185,12 +189,12 @@ export default function LeadForm() {
         </div>
       </div>
 
-      {/* Honeypot anti-spam: oculto para personas y lectores de pantalla. */}
+      {/* Honeypot anti-spam: invisible para personas; los bots suelen rellenarlo. */}
       <input
         type="text"
         name="website"
-        value=""
-        onChange={() => {}}
+        value={values.website}
+        onChange={set('website')}
         tabIndex={-1}
         autoComplete="off"
         aria-hidden="true"
@@ -207,7 +211,7 @@ export default function LeadForm() {
             <div>
               <p className="text-[14.5px] font-semibold text-ink">{contact.error.title}</p>
               <p className="mt-0.5 text-[13.5px] text-muted">{contact.error.detail}</p>
-              {errorDetail && <p className="mt-1 text-[12.5px] text-faint">Detalle: {errorDetail}</p>}
+              {errorDetail && <p className="mt-1 text-[12.5px] text-muted">Detalle: {errorDetail}</p>}
             </div>
           </div>
         </div>

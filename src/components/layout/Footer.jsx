@@ -12,7 +12,7 @@ export default function Footer() {
         </div>
         {footer.groups.map((group) => (
           <nav key={group.title} aria-label={group.title}>
-            <h3 className="text-[13px] font-semibold uppercase tracking-[0.08em] text-faint">{group.title}</h3>
+            <h3 className="text-[13px] font-semibold uppercase tracking-[0.08em] text-muted">{group.title}</h3>
             <ul className="mt-4 space-y-2.5">
               {group.links.map((link) => (
                 <li key={link.label}>
@@ -26,7 +26,7 @@ export default function Footer() {
         ))}
       </div>
       <div className="border-t border-hairline">
-        <div className="mx-auto flex w-full max-w-content flex-col items-center justify-between gap-2 px-6 py-6 text-[13px] text-faint sm:flex-row md:px-8">
+        <div className="mx-auto flex w-full max-w-content flex-col items-center justify-between gap-2 px-6 py-6 text-[13px] text-muted sm:flex-row md:px-8">
           <p>© {new Date().getFullYear()} {footer.brand} · {footer.copyright}</p>
           <p>{footer.tagline}</p>
         </div>

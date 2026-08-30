@@ -1,7 +1,5 @@
 // emailService: notificación opcional por EmailJS.
 // El fallo del correo NUNCA borra ni invalida un lead ya persistido.
-import emailjs from '@emailjs/browser';
-
 export async function sendLeadNotification(lead) {
   const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
   const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -11,6 +9,7 @@ export async function sendLeadNotification(lead) {
     return { skipped: true };
   }
   try {
+    const emailjs = (await import('@emailjs/browser')).default;
     await emailjs.send(serviceId, templateId, {
       name: lead.name,
       company: lead.company || '',

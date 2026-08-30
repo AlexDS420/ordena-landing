@@ -1,5 +1,5 @@
 // Navbar sticky translúcida con menú móvil accesible.
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { navigation } from '../../data/content.js';
 import { ButtonLink } from '../ui/Button.jsx';
@@ -24,6 +24,20 @@ export function Logo({ className = '' }) {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const toggleRef = useRef(null);
+
+  // Escape cierra el menú y devuelve el foco al botón (disclosure accesible).
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        setOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -45,7 +59,7 @@ export default function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-[14.5px] font-medium text-muted transition-colors hover:text-ink"
+                className="text-[14.5px] font-medium text-ink-soft transition-colors hover:text-ink"
               >
                 {link.label}
               </a>
@@ -58,6 +72,7 @@ export default function Navbar() {
           </ButtonLink>
           <button
             type="button"
+            ref={toggleRef}
             className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-hairline bg-white text-ink lg:hidden"
             aria-expanded={open}
             aria-controls="menu-movil"
@@ -70,8 +85,8 @@ export default function Navbar() {
       </nav>
       <div
         id="menu-movil"
-        className={`overflow-hidden border-t border-hairline bg-white/95 backdrop-blur-md transition-[max-height] duration-300 lg:hidden ${
-          open ? 'max-h-[420px]' : 'max-h-0 border-t-0'
+        className={`overflow-hidden border-t border-hairline bg-white/95 backdrop-blur-md transition-[max-height,visibility] duration-300 lg:hidden ${
+          open ? 'max-h-[420px] visible' : 'max-h-0 border-t-0 invisible'
         }`}
       >
         <ul className="space-y-1 px-6 py-4">

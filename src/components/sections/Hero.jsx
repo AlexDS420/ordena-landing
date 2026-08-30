@@ -116,7 +116,7 @@ export default function Hero() {
               {hero.secondaryCta.label}
             </ButtonLink>
           </div>
-          <p className="mt-4 text-[13px] text-faint">{hero.microcopy}</p>
+          <p className="mt-4 text-[13px] text-muted">{hero.microcopy}</p>
         </Reveal>
         <Reveal delay={120} className="relative mt-14 pb-6 md:mt-16">
           <div

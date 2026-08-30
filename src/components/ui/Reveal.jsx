@@ -2,7 +2,7 @@
 // Respeta prefers-reduced-motion (ver index.css).
 import { useEffect, useRef, useState } from 'react';
 
-export default function Reveal({ children, delay = 0, className = '', as: Tag = 'div' }) {
+export default function Reveal({ children, delay = 0, className = '' }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
@@ -29,12 +29,12 @@ export default function Reveal({ children, delay = 0, className = '', as: Tag = 
   }, []);
 
   return (
-    <Tag
+    <div
       ref={ref}
       className={`reveal ${visible ? 'is-visible' : ''} ${className}`}
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
-    </Tag>
+    </div>
   );
 }
